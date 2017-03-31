@@ -1,0 +1,181 @@
+v 1.8.5.0
+- More work on zombie survival.
+- /mark works properly when you are outside the map.
+- /clones uses proper casing of names, and shows which ones are banned.
+- /os env - can also change maxfog and cloudsheight
+- Modularise block data and block physics internally. (Not yet configurable)
+- /tree should not overwrite existing blocks.
+- Made various messages more consistent.
+- Fixed /restore not copying custom blocks.
+- /texture now warns if url is > 64 characters, and also if you use a non-existent scope.
+- Fixed /os map guns throwing a NullReferenceException.
+- Optimised /rs rainbow to send block updates more efficiently.
+- Optimised block physics to use packed Int32 instead of strings, and \replace
+-    classes with structs. (Less pressure on GC)
+- Fixed /queue not working from console.
+- Allow providing a reason for /tempbans.
+- Fix being unable to use some commands while hidden.
+- /undo and /redo now behave like fCraft when not given arguments. (undo/redo last drawop)
+- Fix /fly not working when your X or Z coordinate is 0.
+- Added /showqueue command for zombie survival.
+- /help for a command now shows its additional permissions (if any)
+- Added /skin to allow changing skins of players and bots.
+- Rewritten gui to be nicer. (Much thanks to UclCommander)
+- Initial implementation of ExtPlayerList, so players are grouped separately from bots.
+- Command aliases are now less hardcoded, add fCraft aliases.
+- Show command aliases in their respective /help command.
+- Fix /unflood reloading the map 8 times.
+- 'seed' for flatgrass map type specifies the grass level.
+- Don't call ScrollToEnd() twice, makes gui slightly more responsive.
+- Can show rank prefixes in chat.
+- Add /eat command.
+- Optimise map generation to be slightly faster.
+- Fix /env preset not showing changes for all players.
+- Show player's title in less places to reduce visual clutter. 
+
+v 1.8.4.0
+- Fixed /resetpass not working at all.
+- Show a warning to outdated ClassicalSharp clients, suggesting they update.
+- More work on zombie survival and other game related code.
+- /hug now has more options (Thanks Goodlyay)
+- Added an /undoarea command to only undo players in a specific area.
+- Optimised undo files to use even less disk space.
+- /tree and /draw are now more optimised and implement a DrawOp, so can be used with brushes.
+- Fixed /report only working with a one word report.
+- /place, /click, and /mark now clamp coordinates outside the map properly.
+
+v 1.8.3.0
+- Added brushes system similar to fCraft.
+- Added support for importing .fcm files from fCraft/ProCraft.
+- Significantly optimised physics and /undo responsiveness.
+- Many changes to reduce memory usage.
+- Made most commands that involve querying the database case insensitive.
+- More commands now show an appropriate message if the input name matches multiple online players.
+- /paste now can take an optional list of blocks to only paste, or alternatively an optional list of blocks to not paste.
+- Added a torus draw operation.
+- Cleaned up the economy code. Now separated into /buy, /store, and /eco setup.
+- /tempban can be used with offline players.
+- More work on zombie survival.
+- Noise map generators now use water and sand. (Thanks megalomaniactom)
+- Added an 8ball command. (Thanks PatchTest)
+
+v1.8.2.0
+- Fix a critical bug with leaving a level as the only player and then rejoining
+  the level would result in you being re-added to the level which was then unloaded
+  due to the BlockDB not having finished saving before you rejoined,
+  thus causing draw commands to not work and block updates to not be saved.
+- Can import .mcf files when placed in /extra/import directory.
+- Removed /scinema and /pcinema.
+- Fix /ignore not properly persisting between sessions.
+- Added noise generator for new levels. (thanks megalomaniactom)
+- /limit can now change more variables (rank undo limit, reload threshold 
+  for drawing commands, physics undo max entries)
+
+v1.8.1.0
+- Fix 'blocks modified' not being updated in certain conditions.
+- Can set max number of overseer maps per rank through server properties.
+- Make ban/ranking commands store reasons and show them when used.
+- Fix some /spin modes not working properly.
+- Implement CPE TextColors extension. (ccols command)
+- Fix /explode exploding on player's level, not the target's level.
+- Fix /levels and /unloaded not working in console.
+- Added per-level block definitions with the /lb command.
+- /aka no longer reloads the map. /reload without parameters will do that instead.
+- Fix /clearblockchanges not working on personal realms.
+- Allow /pe to modify online players.
+- IRC commands can now be used via PM, assuming the user is an IRC controller.
+- Implement BlockDefinitionsExt version 2.
+- Reduction in memory usage for physics checks, undo/redo for players and level, and in the /fill command.
+- Optimise BlockDB saving, now only takes 1/3 of time it would take previously.
+- Cleanup countdown and allow generating maps of any size.
+- Fix /cmdbid [num] printing all bindings, instead of only that specific binding.
+- Readd rainbow and explode block physics for /restartphysics.
+- Fix levels not being saved when only modification to the world was a draw command > 10,000 blocks.
+
+v1.8.0.0
+- Fixed /undo from console and IRC not doing anything after restart.
+- /texture with a scope without a url will output the current url for that scope.
+- Fixed not being able to whisper from console.
+- Fixed /portal show not working.
+- Fixed 'survival' mode not working properly.
+- Implemented EnvMapAppearance version 2, allowing usage of .zip texture packs, changing of cloud height, and limiting to a max fog distance.
+- Fixed cases where some IRC colour codes were not being converted.
+- Fixed code page 437 characters not working with IRC.
+- Add 'buildable' and 'deleteable' properties to maps, allowing building/deleting to be disabled client side.
+- Fixed IRC announcing secondary disconnect of hidden players.
+- Added /pclients command which outputs which clients the players are using.
+- Implemented BlockDefinitions, with a /gb command to go with it.
+- Removed 'GrieferStone' and old 'Anti-tunneling' code.
+- Fix guns not being disabled on maps that didn't allow guns.
+- Implement a new undo binary file format that is much more efficient space and parsing wise.
+- Removed /quick.
+- Removed the old and broken translation stuff.
+- Fixed some .x IRC commands crashing the server.
+- Fixed /players <rankname> not working.
+- Fixed global chat not working.
+- Implemented CPE LongerMessages extension.
+- Added /reach, allowing players to place/delete blocks further away.
+- Removed /megaboid, removed old MCForge protection code.
+- Fixed /spin not working on recent mono versions.
+- Optimised /copy and /paste to be much more memory efficient.
+- Created /tpa and /hug commands.
+- Implemented CPE CPFull437 extension, allowing usage of all code page 437 characters in chat, commands, and messages.
+- Begun work on BlockDefinitions.
+- Updated help for /env to be more visually nice.
+- DisplayName is used in most places instead of name.
+- Fixed some cases of hidden players being revealed.
+- Added /mark command that 'marks' the current position as a coordinate for selections/cuboids etc.
+- Added /os block, unblock, kickall, kick, and blacklist.
+- /ranks show ranks logs for a player.
+- Added /promote and /demote which also show rank reasons.
+- Prevent hidden players interacting with killer blocks.
+- Added an 'empty' map generation type.
+- Prevent slapping of hidden players.
+- Fix /freeze not working with console.
+- Added /xmodel.
+v1.7.3.0
+- Show env properties in /mapinfo.
+- Add more os commands: weather, env, texture, motd, pervisit, allowguns
+- Cannot set pervisit to higher than own rank.
+- Reintroduced emotes.
+- Fixed model not changing your own player model until reload.
+- Removed Global Chat banlist update.
+- Removed ability to change global change nick.
+- No message causes current level to be used for /unload.
+- Show level texture in /mapinfo, fix level.properties not saving.
+- Created a new /help menu layout.
+- Fixed /scinema error.
+- Created /xnick, /xtitle, /xtcolor, /xcolor.
+- Made warnings visible in IRC/GUI.
+- Temp fix for MCGalaxy-protection-levl.
+- Use /tcolor (or normal color if no title color) for both brakcers in player title.
+- Adminchat should be turned on when using /xhide.
+- Hidden players should not be announced as AFK.
+- prevent /hackrank being used to spam.
+v1.7.0.0
+- Add an api for localhost.
+- Made /reloadcontrollers, not exposed though.
+- Fix commands not working on console.
+- Allow saving own map with /os map save.
+- Fixed /env save issue.
+
+v1.6.0.0
+- Added /quit.
+- Added /env.
+v1.5.1.2
+- Fix IRC commands and colors.
+v1.5.0.7
+ - IRC color codes supported.
+ - /whonick added.
+ - Implemented EnvMapAppearance.
+v1.0.3.1
+ - Fixed aliases (hopefully)
+v1.0.0.2
+ - Fixed updating
+v1.0.0.1
+ - Fixed /whois showing your nick instead of the player's
+ - Fixed GUI stuff
+v1.0.0.0
+ - MCLawl Custom commands may now be used
+ - /inv is the new shorthand for /Invincible
+ - Fixed Updater
